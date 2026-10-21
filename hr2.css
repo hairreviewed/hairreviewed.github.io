@@ -118,3 +118,8 @@ img{height:auto}
 .missing li::before{content:"✕";position:absolute;left:0;font-weight:800;color:var(--bad)}
 .entry .pros-cons{margin-top:4px}
 .entry>p{font-size:16px;line-height:1.7}
+
+/* ---------- Comparison tables: sticky first column on horizontal scroll ---------- */
+.tablewrap th:first-child,.tablewrap td:first-child{position:sticky;left:0;z-index:2;background:var(--card);box-shadow:inset -1px 0 0 var(--rule)}
+.tablewrap thead th:first-child{background:var(--tint);z-index:3}
+.tablewrap tr.hl th:first-child,.tablewrap tr.hl td:first-child{background:#eef4ff}
