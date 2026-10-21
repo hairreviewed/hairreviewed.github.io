@@ -1,85 +1,96 @@
-/* ===== Hair, Reviewed — layout additions (hr2.css) =====
-   Loads after hr.css. Mobile header fix, homepage sections,
-   split comparison image, finish two-ups, related reading. */
+/* Hair, Reviewed — component additions (v3). Loads after hr.css.
+   RULE: no image is ever cropped. No object-fit:cover, no forced aspect ratios on photos.
+   Every image keeps its natural shape; layouts flex around it. */
 
-/* --- Slim one-row mobile header: no wrapping, nav scrolls sideways --- */
-@media (max-width: 720px){
-  .masthead{padding:14px 0 10px}
+/* Headlines: no lopsided right-side gaps */
+h1,h2,h3,h4,h5{text-wrap:pretty}
+
+/* ---------- Slim mobile header ---------- */
+@media (max-width:720px){
+  .masthead{padding:14px 0 6px}
   .masthead .tagline{display:none}
-  .wordmark{font-size:24px}
-  .nav{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;
-       -webkit-overflow-scrolling:touch;scrollbar-width:none;
-       gap:24px;padding-top:10px;padding-bottom:10px}
+  .nav{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;-webkit-overflow-scrolling:touch;
+       scrollbar-width:none;gap:4px;padding:6px 16px 10px;margin:0 -16px}
   .nav::-webkit-scrollbar{display:none}
-  .nav a{flex:0 0 auto}
+  .nav a{flex:0 0 auto;background:var(--tint)}
+  .nav a.on{background:var(--ink)}
 }
 
-/* --- Homepage section headers --- */
-.kicker{display:flex;align-items:baseline;justify-content:space-between;
-        border-top:2px solid #111;margin:44px 0 18px;padding-top:10px}
-.kicker h2{font-family:var(--display, Georgia, serif);font-size:22px;margin:0;font-weight:600}
-.kicker a{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
-          color:var(--accent,#b3261e);text-decoration:none;white-space:nowrap}
+/* ---------- Every image: natural shape, never cropped ---------- */
+img{height:auto}
+.lead-story>img{width:100%;height:auto;display:block}
 
-/* --- "The Latest" headline list --- */
-.latest{list-style:none;margin:0;padding:0}
-.latest li{border-bottom:1px solid var(--rule,#e5e2dc)}
-.latest a{text-decoration:none;color:inherit;display:block;padding:14px 0}
-.latest .cat2{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-              color:var(--accent,#b3261e)}
-.latest h3{font-family:var(--display, Georgia, serif);font-size:19px;line-height:1.3;
-           margin:4px 0 3px;font-weight:600}
-.latest p{margin:0;color:var(--muted,#6b6b6b);font-size:13.5px;line-height:1.5}
-.latest .when{display:block;font-size:12px;color:var(--muted,#8a8a8a);margin-top:4px}
+/* ---------- Homepage section headers ---------- */
+.kicker{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:44px 0 10px}
+.kicker h2{font-size:22px}
+.kicker a{font-size:14px;font-weight:600;color:var(--accent);text-decoration:none;white-space:nowrap}
 
-/* --- Split (head-to-head) image --- */
-.splitwrap{position:relative}
-.split{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#111}
-.split>div{position:relative;background:#fff}
-.split img{width:100%;height:100%;aspect-ratio:4/5;object-fit:cover;display:block}
-.split .lab{position:absolute;left:0;bottom:0;background:rgba(17,17,17,.84);color:#fff;
-            font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
-            padding:6px 10px;line-height:1.3}
-.splitwrap .vsdot{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-            background:var(--accent,#b3261e);color:#fff;font-weight:800;font-size:13px;
-            width:42px;height:42px;border-radius:50%;display:flex;align-items:center;
-            justify-content:center;z-index:2;box-shadow:0 0 0 3px #fff}
-.card .split img{aspect-ratio:16/11}
-.card .splitwrap{margin-bottom:12px}
-.card .splitwrap .vsdot{width:34px;height:34px;font-size:11px}
+/* ---------- Article cards: thumbnail-left rows (all screens) ---------- */
+.grid{display:grid;grid-template-columns:1fr;gap:0;padding:0}
+@media(min-width:900px){.grid{grid-template-columns:1fr 1fr;column-gap:36px}}
+.grid .card{display:grid;grid-template-columns:120px minmax(0,1fr);column-gap:16px;align-items:start;
+            padding:16px 0;border-bottom:1px solid var(--rule)}
+.grid .card>img{grid-row:1 / span 3;width:100%;height:auto;margin:0!important;border-radius:12px;background:#fff}
+.grid .card .cat{font-size:11.5px}
+.grid .card h3{font-size:17px;line-height:1.3;margin:3px 0 4px}
+.grid .card p{font-size:14.5px;line-height:1.5}
+@media(min-width:900px){.grid .card{grid-template-columns:150px minmax(0,1fr)}}
 
-/* --- Two-up figures (the two finishes) --- */
-.twoup{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 6px}
-.twoup figure{margin:0}
-.twoup img{width:100%;display:block}
-.twoup figcaption{font-size:12px;color:var(--muted,#6b6b6b);padding-top:5px}
+/* ---------- "The Latest" list ---------- */
+.latest{list-style:none;margin:0;padding:0;background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.latest li+li{border-top:1px solid var(--rule)}
+.latest a{text-decoration:none;color:inherit;display:block;padding:16px 18px}
+.latest .cat2{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
+.latest h3{font-size:17px;line-height:1.35;margin:4px 0 4px}
+.latest p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.5}
+.latest .when{display:block;font-size:12.5px;color:#9ca3af;margin-top:6px}
 
-/* --- Related reading --- */
-.related{border-top:2px solid #111;margin-top:46px;padding-top:12px}
-.related h4{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
-            margin:0 0 14px}
-.related .r-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.related a{text-decoration:none;color:inherit;display:block}
-.related img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;margin-bottom:8px;
-             background:#f4f2ee}
-.related .cat2{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-               color:var(--accent,#b3261e)}
-.related h5{font-family:var(--display, Georgia, serif);font-size:15.5px;line-height:1.3;
-            margin:3px 0 0;font-weight:600}
-@media (max-width: 720px){
-  .related .r-grid{grid-template-columns:1fr;gap:0}
-  .related a{display:grid;grid-template-columns:112px 1fr;gap:12px;align-items:center;
-             padding:10px 0;border-bottom:1px solid var(--rule,#e5e2dc)}
-  .related img{margin:0;aspect-ratio:16/11}
+/* ---------- Head-to-head image ---------- */
+.vsimg{width:100%;height:auto;display:block;background:#fff;border-radius:var(--r);box-shadow:var(--shadow)}
+
+/* ---------- Two finishes side by side ---------- */
+.twoup{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 6px;align-items:start}
+.twoup figure{margin:0;background:#fff;border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.twoup img{width:100%;height:auto;display:block;border-radius:0!important}
+.twoup figcaption{font-size:13px;font-weight:600;color:var(--ink);text-align:center;padding:8px 0 10px}
+
+/* ---------- Related reading: thumbnail rows ---------- */
+.related{margin-top:48px}
+.related h4{font-size:20px;margin:0 0 6px}
+.related .r-grid{display:grid;grid-template-columns:1fr;gap:0}
+.related a{text-decoration:none;color:inherit;display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;
+           align-items:start;padding:12px 0;border-bottom:1px solid var(--rule)}
+.related a:last-child{border-bottom:0}
+.related img{grid-row:1 / span 2;width:100%;height:auto;display:block;margin:0;border-radius:10px;background:#fff}
+.related .cat2{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
+.related h5{font-size:15.5px;line-height:1.35;margin:3px 0 0}
+
+/* ---------- Ranked list title row: no gap, nothing squeezed ---------- */
+.rank-row{display:grid;grid-template-columns:38px minmax(0,1fr) auto;align-items:center;gap:12px}
+.entry h2{flex:none}
+@media (max-width:600px){
+  .rank-row{grid-template-columns:38px minmax(0,1fr)}
+  .scorebox{grid-column:1 / -1;flex-direction:row;align-items:baseline;justify-self:start;gap:8px;padding:7px 14px;min-width:0}
+  .scorebox .num{font-size:20px}
+  .scorebox .lbl{font-size:13px;margin:0}
 }
 
-/* --- Uniform homepage card thumbnails --- */
-.grid .card > img{aspect-ratio:16/10;object-fit:cover}
+/* ---------- Video ---------- */
+.vidwrap video{height:auto}
 
-/* --- About / method panel on homepage --- */
-.methodbox{border:1px solid var(--rule,#e5e2dc);background:var(--tint,#faf8f5);
-           padding:22px 24px;margin:44px 0 10px}
-.methodbox h3{font-family:var(--display, Georgia, serif);margin:0 0 6px;font-size:20px}
-.methodbox p{margin:0 0 10px;color:var(--muted,#555);font-size:14.5px}
-.methodbox a{color:var(--accent,#b3261e);font-weight:700;text-decoration:none;font-size:13px;
-             text-transform:uppercase;letter-spacing:.05em}
+/* ---------- Method box ---------- */
+.methodbox{background:var(--tint);border-radius:var(--r);padding:22px 24px;margin:44px 0 10px}
+.methodbox h3{margin:0 0 6px;font-size:19px}
+.methodbox p{margin:0 0 10px;color:var(--muted);font-size:15px;line-height:1.6}
+.methodbox a{color:var(--accent);font-weight:700;text-decoration:none;font-size:14.5px}
+
+/* ---------- Tighter lists + entry body text ---------- */
+.panel li,.faq p{line-height:1.55}
+.panel li{margin-bottom:9px}
+.entry p{font-size:16px;line-height:1.7}
+
+/* ---------- Tables: readable on phones ---------- */
+@media (max-width:600px){
+  table{font-size:13.5px}
+  th,td{padding:10px 10px}
+}
