@@ -123,3 +123,56 @@ img{height:auto}
 .tablewrap th:first-child,.tablewrap td:first-child{position:sticky;left:0;z-index:2;background:var(--card);box-shadow:inset -1px 0 0 var(--rule)}
 .tablewrap thead th:first-child{background:var(--tint);z-index:3}
 .tablewrap tr.hl th:first-child,.tablewrap tr.hl td:first-child{background:#eef4ff}
+
+/* ---------- v4: top utility bar + branded masthead ---------- */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;font-weight:600;color:var(--muted);padding:9px 0;border-bottom:1px solid var(--rule)}
+.topbar a{color:var(--accent);text-decoration:none}
+.tb-l{min-width:0}
+.tb-r{color:var(--ink);white-space:nowrap}
+@media(max-width:480px){.topbar{font-size:11px}}
+.masthead{flex-direction:row;justify-content:center;padding:16px 0 10px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.mark{width:40px;height:40px;border-radius:11px;flex:0 0 auto;display:block}
+.brandtext{display:flex;flex-direction:column;align-items:flex-start}
+.brandtext .tagline{margin-top:3px}
+@media(max-width:720px){
+  .masthead{padding:12px 0 6px}
+  .mark{width:34px;height:34px;border-radius:9px}
+  .brandtext .tagline{display:none}
+}
+
+/* ---------- v4: contained opener image (was full-bleed portrait) ---------- */
+.hero-img{width:100%;max-width:440px;margin:0 auto;display:block;border-radius:var(--r)}
+.lead-story>img.hero-img{width:100%;max-width:440px}
+.lead-story{text-align:left}
+.lead-story .hero-wrap{background:var(--tint);border-radius:var(--r);padding:18px 0;margin-bottom:4px}
+
+/* ---------- v4: heading scale up ---------- */
+h1.art{font-size:clamp(30px,7vw,46px)}
+.lead-story h2{font-size:clamp(27px,6.4vw,40px)}
+.entry h2{font-size:clamp(22px,5.2vw,27px)}
+.sectionhead{font-size:clamp(24px,5.6vw,30px)}
+.listhead{font-size:22px}
+.sell h4{font-size:18px}
+.missing h4{font-size:15px}
+.faq h3{font-size:19px}
+.kicker h2{font-size:24px}
+.grid .card h3{font-size:18px}
+.latest h3{font-size:18px}
+.related h4{font-size:21px}
+
+/* ---------- v4.1: homepage lead — magazine split on desktop ---------- */
+@media(min-width:900px){
+  .lead-story{display:grid;grid-template-columns:400px minmax(0,1fr);column-gap:40px;align-items:center;padding:26px 0 10px}
+  .lead-story .hero-wrap{grid-column:1;grid-row:1/span 3;margin:0}
+  .lead-story .card,.lead-story h2,.lead-story p{grid-column:2}
+  .lead-story h2{margin-top:6px}
+}
+
+/* ---------- v4.2: polish ---------- */
+@media(max-width:560px){.topbar{justify-content:center}.topbar .tb-r{display:none}}
+.entry .sell img{max-width:420px;display:block;margin-left:auto;margin-right:auto}
+
+/* ---------- v4.3: pullout callout ---------- */
+.pullout{border-left:4px solid var(--accent);background:var(--tint);padding:14px 18px;margin:20px 0 20px 0;border-radius:0 12px 12px 0;font-size:17px;line-height:1.65}
+.pullout b{color:var(--ink)}
